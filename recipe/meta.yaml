@@ -11,14 +11,14 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
-  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
     - python
     - setuptools
+    - wheel
   run:
     - python
     - toolz
@@ -30,6 +30,10 @@ requirements:
 test:
   imports:
     - kanren
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/pythological/kanren
